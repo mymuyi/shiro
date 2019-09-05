@@ -13,9 +13,14 @@ import org.junit.Test;
 /**
  * @Author: yangke
  * @Date: 2019/8/13
+ *
+ * 登录、注销测试
  */
 public class LoginLogoutTest {
 
+    /**
+     * 不使用 Realm
+     */
     @Test
     public void testHelloWorld() {
         // 获取 SecurityManager 工厂
@@ -37,12 +42,15 @@ public class LoginLogoutTest {
        }
 
         // 断言登录成功
-        Assert.assertEquals(true, subject.isAuthenticated());
+        Assert.assertTrue(subject.isAuthenticated());
 
         // 注销
         subject.logout();
     }
 
+    /**
+     * 使用自定义 Realm
+     */
     @Test
     public void testCustomRealm() {
 
@@ -62,9 +70,12 @@ public class LoginLogoutTest {
         }
 
         // 断言登录失败
-        Assert.assertEquals(false, subject.isAuthenticated());
+        Assert.assertFalse(subject.isAuthenticated());
     }
 
+    /**
+     * 多个 Realm
+     */
     @Test
     public void testCustomMultRealm() {
 
@@ -83,11 +94,14 @@ public class LoginLogoutTest {
 
         }
 
-        Assert.assertEquals(true, subject.isAuthenticated());
+        Assert.assertTrue(subject.isAuthenticated());
 
         subject.logout();
     }
 
+    /**
+     * JDBC Realm
+     */
     @Test
     public void testJDBCRealm() {
 
@@ -106,7 +120,7 @@ public class LoginLogoutTest {
 
         }
 
-        Assert.assertEquals(true, subject.isAuthenticated());
+        Assert.assertTrue(subject.isAuthenticated());
 
         subject.logout();
     }

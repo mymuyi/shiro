@@ -14,17 +14,23 @@ public class MyRealm1 implements Realm {
     }
 
     @Override
-    public boolean supports(AuthenticationToken authenticationToken) {
+    public boolean supports(AuthenticationToken token) {
         // 仅支持 UsernamePasswordToken 类型的 Token
-        return authenticationToken instanceof UsernamePasswordToken;
+        return token instanceof UsernamePasswordToken;
     }
 
+    /**
+     * 身份认证
+     * @param token， Subject.login(token) 传入的 token
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
-    public AuthenticationInfo getAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+    public AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         // 得到用户名
-        String username = (String) authenticationToken.getPrincipal();
+        String username = (String) token.getPrincipal();
         // 得到密码
-        String password = new String((char[])authenticationToken.getCredentials());
+        String password = new String((char[])token.getCredentials());
 
         if (!"zhang".equals(username)) {
             // 用户名错误

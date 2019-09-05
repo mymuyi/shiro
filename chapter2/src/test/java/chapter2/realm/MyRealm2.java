@@ -14,14 +14,20 @@ public class MyRealm2 implements Realm {
     }
 
     @Override
-    public boolean supports(AuthenticationToken authenticationToken) {
-        return authenticationToken instanceof UsernamePasswordToken;
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof UsernamePasswordToken;
     }
 
+    /**
+     * 身份认证
+     * @param token， Subject.login(token) 传入的 token
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
-    public AuthenticationInfo getAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        String username = (String) authenticationToken.getPrincipal();
-        String password = new String((char[]) authenticationToken.getCredentials());
+    public AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        String username = (String) token.getPrincipal();
+        String password = new String((char[]) token.getCredentials());
         if (!"wang".equals(username)) {
             throw new UnknownAccountException();
         }

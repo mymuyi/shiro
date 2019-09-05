@@ -13,22 +13,32 @@ import java.util.Collection;
 /**
  * @Author: yangke
  * @Date: 2019/8/13
- * 自定义验证策略，
+ *
+ * 自定义验证策略，至少要有两个 Realm 验证成功
  */
 public class AtLeastTwoAuthenticatorStrategy extends AbstractAuthenticationStrategy {
 
+    /**
+     * 在所有 Realm 验证之前调用
+     */
     @Override
     public AuthenticationInfo beforeAllAttempts(Collection<? extends Realm> realms, AuthenticationToken token) throws AuthenticationException {
         //返回一个权限的认证信息
         return new SimpleAuthenticationInfo();
     }
 
+    /**
+     * 在每个 Realm 验证之前调用
+     */
     @Override
     public AuthenticationInfo beforeAttempt(Realm realm, AuthenticationToken token, AuthenticationInfo aggregate) throws AuthenticationException {
         //返回之前合并的
         return aggregate;
     }
 
+    /**
+     * 在每个 Realm 验证之后调用
+     */
     @Override
     public AuthenticationInfo afterAttempt(Realm realm, AuthenticationToken token, AuthenticationInfo singleRealmInfo, AuthenticationInfo aggregateInfo, Throwable t) throws AuthenticationException {
         AuthenticationInfo info;
@@ -45,6 +55,9 @@ public class AtLeastTwoAuthenticatorStrategy extends AbstractAuthenticationStrat
         return info;
     }
 
+    /**
+     * 在所有 Realm 验证之后调用
+     */
     @Override
     public AuthenticationInfo afterAllAttempts(AuthenticationToken token, AuthenticationInfo aggregate) throws AuthenticationException {
         if (aggregate == null || CollectionUtils.isEmpty(aggregate.getPrincipals()) || aggregate.getPrincipals().getRealmNames().size() < 2) {
