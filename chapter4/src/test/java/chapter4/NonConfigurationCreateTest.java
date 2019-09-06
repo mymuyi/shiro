@@ -25,6 +25,7 @@ public class NonConfigurationCreateTest {
 
     @Test
     public void test() {
+
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
 
         // 设置 authenticator

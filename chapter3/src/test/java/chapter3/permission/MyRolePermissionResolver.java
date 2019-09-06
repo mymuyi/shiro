@@ -14,6 +14,7 @@ import java.util.Collection;
 public class MyRolePermissionResolver implements RolePermissionResolver {
     @Override
     public Collection<Permission> resolvePermissionsInRole(String roleString) {
+        // 根据角色名添加 Permission 实例
         if("role1".equals(roleString)) {
             return Arrays.asList((Permission)new WildcardPermission("menu:*"));
         }

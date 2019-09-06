@@ -22,7 +22,7 @@ public class ConfigurationCreateTest {
         Factory<SecurityManager> factory =
                 new IniSecurityManagerFactory("classpath:shiro-config.ini");
 
-        org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
+        SecurityManager securityManager = factory.getInstance();
 
         //将SecurityManager设置到SecurityUtils 方便全局使用
         SecurityUtils.setSecurityManager(securityManager);
@@ -33,8 +33,6 @@ public class ConfigurationCreateTest {
         subject.login(token);
 
         Assert.assertTrue(subject.isAuthenticated());
-
-
 
     }
 }

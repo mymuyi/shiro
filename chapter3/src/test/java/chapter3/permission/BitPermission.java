@@ -53,11 +53,17 @@ public class BitPermission implements Permission {
         }
     }
 
+    /**
+     * 权限匹配，代码是复制的，还没看懂是怎么匹配的
+     * @param p
+     * @return
+     */
     @Override
     public boolean implies(Permission p) {
         if (!(p instanceof BitPermission)) {
             return false;
         }
+
         BitPermission other = (BitPermission) p;
 
         if (!("*".equals(this.resourceIdentify) || this.resourceIdentify.equals(other.resourceIdentify))) {

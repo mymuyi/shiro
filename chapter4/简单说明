@@ -1,0 +1,43 @@
+1. IniSecurityManagerFactory 是创建 securityManager 的工厂，其需要一个 ini 配置文件路径，其支持“classpath:”（类路径）、“file:”（文件系统）、“url:”（网络）三种路径格式，默认是文件系统； 
+
+2. 默认情况先创建一个名字为 securityManager ， 类型为 org.apache.shiro.mgt.DefaultSecurityManager 的默认的 SecurityManager，如果想自定义，只需要在 ini 配置文件中指定 “securityManager=SecurityManager 实现类” 即可，名字必须为 securityManager，它是起始的根； 
+
+INI 配置分类： 
+
+1. [main]
+   提供了对根对象 securityManager 及其依赖的配置
+   securityManager=org.apache.shiro.mgt.DefaultSecurityManager
+   …………
+   securityManager.realms=$jdbcRealm
+   
+   
+   
+2. [users]
+
+   提供了对用户/密码及其角色的配置，用户名=密码，角色 1，角色 2
+
+   username=password,role1,role2 
+
+   
+
+3. [roles]
+
+   提供了角色及权限之间关系的配置，角色=权限 1，权限 2
+
+   role1=permission1,permission2 
+
+   
+
+4. [urls]
+
+   用于 web，提供了对 web url 拦截相关的配置，url=拦截器[参数]，拦截器
+
+   /index.html = anon
+   /admin/** = authc, roles[admin], perms["permission1"] 
+
+   
+
+5. 依赖注入
+   1、对象名=全限定类名 相对于调用 public 无参构造器创建对象
+   2、对象名.属性名=值 相当于调用 setter 方法设置常量值
+   3、对象名.属性名=$对象引用 相当于调用 setter 方法设置对象引用 

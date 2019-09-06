@@ -31,6 +31,7 @@ public class BaseTest {
 
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         subject.login(token);
+
     }
 
     public Subject subject() {
