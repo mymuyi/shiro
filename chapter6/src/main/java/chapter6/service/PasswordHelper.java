@@ -14,6 +14,9 @@ import org.apache.shiro.util.ByteSource;
  */
 public class PasswordHelper {
 
+    /**
+     * 随机数
+     */
     private RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
 
     private String algorithmName = "md5";

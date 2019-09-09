@@ -14,7 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @Author: yangke
  * @Date: 2019/8/30
  *
- *
  */
 public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher {
 
@@ -38,6 +37,7 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
         }
 
         AtomicInteger retryCount = (AtomicInteger)element.getObjectValue();
+        // 重试次数大于5，抛出异常
         if (retryCount.incrementAndGet() > 5) {
             throw EXCESSIVE_ATTEMPTS_EXCEPTION;
         }

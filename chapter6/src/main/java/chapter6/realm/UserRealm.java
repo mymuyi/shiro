@@ -18,6 +18,11 @@ public class UserRealm extends AuthorizingRealm {
 
     private UserService userService = new UserServiceImpl();
 
+    /**
+     * 根据身份信息进行授权
+     * @param principalCollection
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 
