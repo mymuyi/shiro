@@ -13,13 +13,12 @@
     <context-param>
         <param-name>shiroEnvironmentClass</param-name>
         <param-value>org.apache.shiro.web.env.IniWebEnvironment</param-value>
+        <!--<param-value>chapter8.env.MyIniWebEnvironment</param-value>-->
     </context-param>
     <context-param>
         <param-name>shiroConfigLocations</param-name>
         <!-- 默认先找 /WEB-INF/shiro.ini，如果没有，找classpath:shiro.ini -->
-        <!--<param-value>classpath:shiro.ini</param-value>-->
-        <param-value>classpath:shiro-basicfilterlogin.ini</param-value>
-        <!--<param-value>classpath:shiro-formfilterlogin.ini</param-value>-->
+        <param-value>classpath:shiro.ini</param-value>
     </context-param>
 
     <filter>
